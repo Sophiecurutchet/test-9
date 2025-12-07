@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sophie Curutchet – Questionnaire Santé</title>
+
+<style>
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        background: #f7f5f8;
+        color: #333;
+        margin: 0;
+        padding: 0;
+    }
+
+    header {
+        background: linear-gradient(135deg, #f3dfe7, #d9e8e3);
+        padding: 25px;
+        text-align: center;
+        border-bottom-left-radius: 20px;
+        border-bottom-right-radius: 20px;
+    }
+
+    h1 {
+        margin: 0;
+        color: #6c7b76;
+        font-size: 28px;
+        font-weight: 700;
+    }
+
+    .container {
+        width: 90%;
+        max-width: 750px;
+        margin: 20px auto;
+    }
+
+    .card {
+        background: white;
+        padding: 20px;
+        border-radius: 18px;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+        margin-bottom: 20px;
+    }
+
+    h2 {
+        color: #6c7b76;
+    }
+
+    .category-title {
+        font-size: 22px;
+        margin-bottom: 10px;
+        color: #6c7b76;
+        font-weight: 600;
+    }
+
+    .question {
+        padding: 12px;
+        margin: 12px 0;
+        background: #faf9fb;
+        border-radius: 12px;
+        border: 1px solid #ebe8ec;
+    }
+
+    .responses {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 10px;
+    }
+
+    .responses label {
+        flex: 1;
+        text-align: center;
+        padding: 6px;
+        border-radius: 10px;
+        background: #f0edef;
+        margin: 0 4px;
+        cursor: pointer;
+        font-size: 13px;
+    }
+
+    input[type="radio"] {
+        display: none;
+    }
+
+    input[type="radio"]:checked + label {
+        background: #d9e8e3;
+        font-weight: bold;
+        color: #3d524b;
+    }
+
+    .btn {
+        width: 100%;
+        padding: 15px;
+        background: #c9dcd5;
+        color: #3d524b;
+        border: none;
+        border-radius: 14px;
+        margin-top: 20px;
+        font-size: 17px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    .btn:hover {
+        background: #b6cec5;
+    }
+
+    .scoreBox {
+        padding: 15px;
+        border-radius: 12px;
+        margin: 10px 0;
+        color: white;
+        font-weight: 600;
+    }
+
+    .green { background: #7dbf8e; }
+    .orange { background: #e7b36a; }
+    .red { background: #d47070; }
+
+    .icon {
+        font-size: 25px;
+        margin-right: 8px;
+    }
+
+    #results {
+        margin-top: 20px;
+    }
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>Sophie Curutchet – Chiropratique & Hypnose</h1>
+</header>
+
+<div class="container">
+
+    <div class="card">
+        <h2>Informations patient</h2>
+        <label>Prénom :</label>
+        <input id="prenom" type="text" style="width:100%; padding:10px; border-radius:10px; border:1px solid #ddd; margin-bottom:10px;">
+
+        <label>Nom :</label>
+        <input id="nom" type="text" style="width:100%; padding:10px; border-radius:10px; border:1px solid #ddd;">
+    </div>
+
+    <form id="formulaire"></form>
+
+    <button class="btn" onclick="calculateResults()">Obtenir mes résultats</button>
+    <button class="btn" onclick="window.print()">Imprimer / PDF</button>
+
+    <div id="results" class="card"></div>
+
+</div>
+
+<script>
+/* -------------------------------------------------------
+   QUESTIONS PAR CATÉGORIES
+-------------------------------------------------------- */
+const categories = {
+    "Mental 🧠": [
+        "Difficulté à se concentrer",
+        "Pensées envahissantes",
+        "Baisse de motivation",
+        "Sensation d’être débordé"
+    ],
+    "Système Nerveux ⚡": [
+        "Sursauts faciles",
+        "Peur d’être seul",
+        "Difficulté à se sentir en sécurité",
+        "Hypervigilance",
+        "Sensations d’être sur les nerfs"
+    ],
+    "Digestif 🍃": [
+        "Ballonnements",
+        "Digestion lente",
+        "Inconfort après les repas",
+        "Difficulté à digérer le gras"
+    ],
+    "Hormonal 🌸": [
+        "Sautes d’humeur",
+        "Règles douloureuses",
+        "Acné cyclique",
+        "Sensibilité importante avant règles"
+    ],
+    "Sommeil 😴": [
+        "Réveils nocturnes",
+        "Cauchemars",
+        "Sommeil agité"
+    ],
+    "Émotionnel 💗": [
+        "Coups de blues",
+        "Stress régulier",
+        "Irritabilité"
+    ],
+    "Physique 💪": [
+        "Maux de tête",
+        "Vertiges",
+        "Tachycardie",
+        "Fatigue au réveil",
+        "Envies de sucre"
+    ]
+};
+
+/* -------------------------------------------------------
+   GÉNÉRATION AUTOMATIQUE DU QUESTIONNAIRE
+-------------------------------------------------------- */
+const form = document.getElementById("formulaire");
+
+Object.entries(categories).forEach(([cat, questions], catIndex) => {
+    let html = `<div class="card"><div class="category-title">${cat}</div>`;
+
+    questions.forEach((q, i) => {
+        html += `
+        <div class="question">
+            ${q}
+            <div class="responses">
+                <input type="radio" id="${catIndex}_${i}_0" name="${catIndex}_${i}" value="0">
+                <label for="${catIndex}_${i}_0">Rare / jamais</label>
+
+                <input type="radio" id="${catIndex}_${i}_1" name="${catIndex}_${i}" value="1">
+                <label for="${catIndex}_${i}_1">1–3 fois / mois</label>
+
+                <input type="radio" id="${catIndex}_${i}_2" name="${catIndex}_${i}" value="2">
+                <label for="${catIndex}_${i}_2">1+ fois / semaine</label>
+            </div>
+        </div>`;
+    });
+
+    html += `</div>`;
+    form.innerHTML += html;
+});
+
+/* -------------------------------------------------------
+   NOUVELLE ANALYSE CLINIQUE
+-------------------------------------------------------- */
+function calculateResults() {
+    const prenom = document.getElementById("prenom").value.trim();
+    const nom = document.getElementById("nom").value.trim();
+
+    const results = document.getElementById("results");
+    results.innerHTML = `<h2>Résultats pour ${prenom} ${nom}</h2>`;
+
+    let categoryIndex = 0;
+
+    Object.entries(categories).forEach(([cat, questions]) => {
+        let moderate = 0;
+        let frequent = 0;
+
+        questions.forEach((q, i) => {
+            const selected = document.querySelector(`input[name="${categoryIndex}_${i}"]:checked`);
+            if (!selected) return;
+
+            const val = Number(selected.value);
+            if (val === 1) moderate++;
+            if (val === 2) frequent++;
+        });
+
+        let color = "green";
+        let label = "Bon équilibre";
+
+        const modRate = moderate / questions.length;
+        const freqRate = frequent / questions.length;
+
+        if (frequent >= 2 || freqRate >= 0.20 || modRate >= 0.30) {
+            color = "red";
+            label = "En surcharge – nécessite de l'attention";
+        } else if (frequent >= 1 || modRate >= 0.20) {
+            color = "orange";
+            label = "Tension modérée";
+        }
+
+        results.innerHTML += `
+            <div class="scoreBox ${color}">
+                ${cat} : ${label}<br>
+                <small>${moderate} symptômes mensuels – ${frequent} hebdomadaires</small>
+            </div>
+        `;
+
+        categoryIndex++;
+    });
+}
+</script>
+
+</body>
+</html>
