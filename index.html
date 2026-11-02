@@ -1,288 +1,107 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sophie Curutchet – Questionnaire Santé</title>
-
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#f4eee9">
+<title>Bilan & suivi — Sophie Curutchet</title>
 <style>
-    body {
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-        background: #f7f5f8;
-        color: #333;
-        margin: 0;
-        padding: 0;
-    }
-
-    header {
-        background: linear-gradient(135deg, #f3dfe7, #d9e8e3);
-        padding: 25px;
-        text-align: center;
-        border-bottom-left-radius: 20px;
-        border-bottom-right-radius: 20px;
-    }
-
-    h1 {
-        margin: 0;
-        color: #6c7b76;
-        font-size: 28px;
-        font-weight: 700;
-    }
-
-    .container {
-        width: 90%;
-        max-width: 750px;
-        margin: 20px auto;
-    }
-
-    .card {
-        background: white;
-        padding: 20px;
-        border-radius: 18px;
-        box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-        margin-bottom: 20px;
-    }
-
-    h2 {
-        color: #6c7b76;
-    }
-
-    .category-title {
-        font-size: 22px;
-        margin-bottom: 10px;
-        color: #6c7b76;
-        font-weight: 600;
-    }
-
-    .question {
-        padding: 12px;
-        margin: 12px 0;
-        background: #faf9fb;
-        border-radius: 12px;
-        border: 1px solid #ebe8ec;
-    }
-
-    .responses {
-        display: flex;
-        justify-content: space-between;
-        margin-top: 10px;
-    }
-
-    .responses label {
-        flex: 1;
-        text-align: center;
-        padding: 6px;
-        border-radius: 10px;
-        background: #f0edef;
-        margin: 0 4px;
-        cursor: pointer;
-        font-size: 13px;
-    }
-
-    input[type="radio"] {
-        display: none;
-    }
-
-    input[type="radio"]:checked + label {
-        background: #d9e8e3;
-        font-weight: bold;
-        color: #3d524b;
-    }
-
-    .btn {
-        width: 100%;
-        padding: 15px;
-        background: #c9dcd5;
-        color: #3d524b;
-        border: none;
-        border-radius: 14px;
-        margin-top: 20px;
-        font-size: 17px;
-        cursor: pointer;
-        transition: 0.3s;
-    }
-
-    .btn:hover {
-        background: #b6cec5;
-    }
-
-    .scoreBox {
-        padding: 15px;
-        border-radius: 12px;
-        margin: 10px 0;
-        color: white;
-        font-weight: 600;
-    }
-
-    .green { background: #7dbf8e; }
-    .orange { background: #e7b36a; }
-    .red { background: #d47070; }
-
-    .icon {
-        font-size: 25px;
-        margin-right: 8px;
-    }
-
-    #results {
-        margin-top: 20px;
-    }
+:root{--ink:#263b39;--muted:#687875;--sage:#dce8df;--sage2:#eef4ef;--rose:#f3e4e1;--sand:#f7f3ed;--line:#e5e7e2;--white:#fff;--accent:#58776d;--gold:#b18a58;--shadow:0 12px 34px #30453b12}
+*{box-sizing:border-box}body{margin:0;background:#f6f5f1;color:var(--ink);font:15px/1.55 Inter,system-ui,-apple-system,Segoe UI,sans-serif}header{padding:34px 22px 28px;background:linear-gradient(125deg,#e9eee7,#f3e5e1 70%,#f6f0e8);text-align:center;border-bottom:1px solid #e5e5dc}header .eyebrow{letter-spacing:.16em;text-transform:uppercase;font-size:11px;color:#62766d;font-weight:700}h1{font-family:Georgia,serif;font-size:clamp(27px,4vw,40px);font-weight:500;margin:8px 0;color:#314943}header p{max-width:720px;margin:0 auto;color:#66736e}.wrap{max-width:1080px;margin:26px auto;padding:0 18px}.tabs{display:flex;gap:8px;overflow:auto;padding:5px 0 16px}.tab{white-space:nowrap;border:1px solid var(--line);background:white;color:var(--muted);padding:10px 15px;border-radius:30px;cursor:pointer;font-weight:650}.tab.active{background:#36594f;color:white;border-color:#36594f}.panel{display:none}.panel.active{display:block}.card{background:white;border:1px solid var(--line);border-radius:18px;padding:22px;margin:0 0 17px;box-shadow:var(--shadow)}h2{font:500 25px Georgia,serif;margin:0 0 8px;color:#35534a}h3{font-size:16px;margin:0 0 12px;color:#3e5c52}.sub{color:var(--muted);margin:0 0 18px}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.field label,.question label,.small-label{display:block;font-size:13px;font-weight:700;color:#536761;margin:0 0 6px}.field input,.field select,.field textarea{width:100%;border:1px solid #dfe5df;border-radius:10px;padding:11px 12px;background:#fcfdfb;color:var(--ink);font:inherit}.field textarea{min-height:76px;resize:vertical}.section-title{display:flex;align-items:center;gap:10px;margin:4px 0 14px}.section-title span{font-size:22px}.question{border:1px solid var(--line);border-radius:13px;padding:14px;margin:10px 0;background:#fcfcfa}.question p{margin:0 0 10px;font-weight:650}.choices{display:flex;flex-wrap:wrap;gap:7px}.choice{position:relative}.choice input{position:absolute;opacity:0}.choice span{display:inline-block;padding:8px 11px;border:1px solid #e1e7e0;border-radius:9px;background:white;color:#62736d;font-size:13px;cursor:pointer}.choice input:checked+span{background:#dcebe1;border-color:#87a696;color:#2e5145;font-weight:750}.btn{border:0;border-radius:11px;padding:12px 17px;background:#36594f;color:white;font:700 14px inherit;cursor:pointer}.btn.secondary{background:#eaf0eb;color:#36594f;border:1px solid #dce6de}.btn.ghost{background:white;color:#52665e;border:1px solid var(--line)}.actions{display:flex;flex-wrap:wrap;gap:9px;margin:16px 0}.notice{padding:13px 15px;background:#f6f3eb;border-left:3px solid #c6a777;border-radius:8px;color:#665d4d;font-size:13px;margin:12px 0}.safe{background:#edf4ef;border-left-color:#6f9581;color:#435c50}.metric-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.metric{padding:16px;border-radius:14px;background:#f4f7f3;border:1px solid #e5ece5}.metric strong{display:block;font:500 29px Georgia,serif;color:#36594f}.metric small{color:var(--muted)}.bar{height:9px;background:#edf0eb;border-radius:10px;overflow:hidden;margin-top:9px}.bar i{display:block;height:100%;background:#77998a;border-radius:10px}.photo-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.photo-slot{border:1px dashed #b9c8bd;border-radius:14px;padding:13px;background:#fbfcfa}.photo-slot img{width:100%;height:260px;object-fit:contain;background:#f1f2ee;border-radius:9px;margin-top:10px}.photo-slot input{max-width:100%;font-size:13px}.hidden{display:none!important}.risk-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.risk{padding:13px;border-radius:12px;background:#f8f6f1;border:1px solid #ece8df}.risk b{display:block;margin-bottom:3px}.muted{color:var(--muted);font-size:13px}.chart-wrap{background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px;overflow:hidden}.chart-wrap canvas{width:100%;height:270px;display:block}.history-item{border:1px solid var(--line);border-radius:11px;padding:12px;margin:8px 0;display:flex;justify-content:space-between;gap:12px;align-items:center}.tag{font-size:11px;border-radius:20px;padding:4px 8px;background:#edf3ee;color:#49675a}.footer{font-size:12px;color:#78847e;text-align:center;padding:18px}.progress{height:6px;background:#e9eee9;border-radius:9px;margin:12px 0}.progress i{display:block;height:100%;width:0;background:#77998a;border-radius:9px}.result-head{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;flex-wrap:wrap}.pill{border-radius:30px;background:#eaf1eb;padding:6px 11px;color:#476456;font-size:12px;font-weight:700}
+@media(max-width:680px){.grid,.photo-grid,.risk-list{grid-template-columns:1fr}.metric-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.card{padding:17px}.photo-slot img{height:220px}}
+@media print{body{background:white}.tabs,.actions,.btn,.photo-slot input,.footer{display:none!important}.panel{display:none!important}.panel.active{display:block!important}.card{box-shadow:none;break-inside:avoid}.wrap{max-width:none;margin:0;padding:0}header{padding:15px}}
 </style>
 </head>
-
 <body>
-
-<header>
-    <h1>Sophie Curutchet – Chiropratique & Hypnose</h1>
-</header>
-
-<div class="container">
-
-    <div class="card">
-        <h2>Informations patient</h2>
-        <label>Prénom :</label>
-        <input id="prenom" type="text" style="width:100%; padding:10px; border-radius:10px; border:1px solid #ddd; margin-bottom:10px;">
-
-        <label>Nom :</label>
-        <input id="nom" type="text" style="width:100%; padding:10px; border-radius:10px; border:1px solid #ddd;">
-    </div>
-
-    <form id="formulaire"></form>
-
-    <button class="btn" onclick="calculateResults()">Obtenir mes résultats</button>
-    <button class="btn" onclick="window.print()">Imprimer / PDF</button>
-
-    <div id="results" class="card"></div>
-
+<header><div class="eyebrow">Espace professionnel · Bilan & évolution</div><h1>Sophie Curutchet</h1><p>Chiropratique · Hypnose · Comprendre la personne dans sa globalité</p></header>
+<main class="wrap">
+<nav class="tabs" aria-label="Sections">
+<button class="tab active" data-tab="patient">1. Patient</button><button class="tab" data-tab="bilan">2. Bilan</button><button class="tab" data-tab="posture">3. Posture</button><button class="tab" data-tab="analyse">4. Analyse</button><button class="tab" data-tab="suivi">5. Suivi</button>
+</nav>
+<section id="patient" class="panel active">
+<div class="card"><h2>Fiche patient</h2><p class="sub">Créer une séance de bilan. Les données saisies dans cette version de démonstration restent uniquement dans la mémoire de cette page.</p>
+<div class="grid">
+<div class="field"><label for="first">Prénom</label><input id="first" autocomplete="off" placeholder="Prénom"></div>
+<div class="field"><label for="last">Nom</label><input id="last" autocomplete="off" placeholder="Nom"></div>
+<div class="field"><label for="age">Âge</label><input id="age" type="number" min="1" max="120" placeholder="Âge"></div>
+<div class="field"><label for="date">Date du bilan</label><input id="date" type="date"></div>
+<div class="field"><label for="context">Motif / objectif du patient</label><input id="context" placeholder="Ex. mobilité, douleur, sommeil…"></div>
+<div class="field"><label for="activity">Activité physique habituelle</label><select id="activity"><option value="0">Très faible / sédentaire</option><option value="1" selected>Modérée / irrégulière</option><option value="2">Régulière</option><option value="3">Soutenue</option></select></div>
 </div>
-
+<div class="notice safe">Prototype de démonstration : ne saisis pas de données nominatives ou de santé réelles. GitHub Pages n'est pas un dossier patient sécurisé. Avant tout usage clinique réel, prévoir une architecture conforme au cadre RGPD et, lorsque requis, un hébergement certifié HDS.</div>
+<div class="actions"><button class="btn" onclick="go('bilan')">Commencer le bilan →</button></div></div>
+<div class="card"><h3>Cadre de l'évaluation</h3><p class="muted">Bilan de départ puis réévaluation conseillée à intervalles définis avec le praticien (par exemple tous les 3 mois après la phase initiale). Les questionnaires complètent l'entretien et l'examen clinique ; ils ne remplacent ni diagnostic médical ni orientation si nécessaire.</p></div>
+</section>
+<section id="bilan" class="panel">
+<div class="card"><div class="result-head"><div><h2>Questionnaire global</h2><p class="sub">Réponses rapides par clic · environ 5 à 6 minutes. Pour chaque item, indique la fréquence ou l'intensité ressentie sur les 2 dernières semaines.</p></div><span class="pill" id="completion">0 / 16 réponses</span></div><div class="progress"><i id="progressbar"></i></div>
+<div id="questions"></div>
+<div class="actions"><button class="btn" onclick="scoreNow()">Calculer le bilan</button><button class="btn secondary" onclick="go('analyse')">Voir l'analyse →</button></div>
+</div>
+<div class="notice">Important : cette version utilise des items de suivi construits pour ce prototype. Ils ne constituent pas des échelles cliniques validées et leurs scores ne doivent pas être interprétés comme un diagnostic. L'intégration de questionnaires validés (version française, licence et règles de cotation vérifiées) sera une étape de validation clinique avant utilisation professionnelle.</div>
+</section>
+<section id="posture" class="panel">
+<div class="card"><h2>Analyse posturale photographique</h2><p class="sub">Ajoute les photos prises par toi-même : patient habillé, pieds visibles si possible, posture naturelle, appareil à hauteur constante, cadrage et distance comparables d'une séance à l'autre.</p>
+<div class="photo-grid">
+<div class="photo-slot"><h3>Vue de face</h3><label class="small-label" for="frontPhoto">Charger une photo de face</label><input id="frontPhoto" type="file" accept="image/*" onchange="previewPhoto(event,'frontPreview')"><img id="frontPreview" class="hidden" alt="Aperçu posture de face"></div>
+<div class="photo-slot"><h3>Vue de profil</h3><label class="small-label" for="sidePhoto">Charger une photo de profil</label><input id="sidePhoto" type="file" accept="image/*" onchange="previewPhoto(event,'sidePreview')"><img id="sidePreview" class="hidden" alt="Aperçu posture de profil"></div>
+</div>
+<div class="notice safe">Les images sont affichées localement dans cette page et ne sont ni téléversées ni enregistrées par ce prototype. Elles seront perdues au rechargement. Pour un usage réel, prévoir consentement explicite, information sur le droit à l'image, accès restreint, durée de conservation et stockage sécurisé adapté.</div>
+<h3>Observations descriptives du praticien</h3><div class="grid">
+<div class="field"><label for="frontNotes">Vue de face</label><textarea id="frontNotes" placeholder="Ex. alignement apparent des épaules, bassin, appuis… Décrire sans conclure à une pathologie."></textarea></div>
+<div class="field"><label for="sideNotes">Vue de profil</label><textarea id="sideNotes" placeholder="Ex. position apparente de la tête, courbures visibles, répartition des appuis…"></textarea></div>
+<div class="field"><label for="postureLimits">Limites / conditions de prise de vue</label><textarea id="postureLimits" placeholder="Vêtements, angle, douleur au moment de la photo, asymétrie de prise de vue…"></textarea></div>
+<div class="field"><label for="posturePlan">Points à recontrôler</label><textarea id="posturePlan" placeholder="Éléments à comparer lors de la prochaine séance."></textarea></div>
+</div></div>
+</section>
+<section id="analyse" class="panel">
+<div class="card"><div class="result-head"><div><h2>Synthèse du bilan</h2><p class="sub">Lecture rapide des réponses et des dimensions à approfondir en entretien.</p></div><span class="pill" id="scoreDate">Aucun bilan calculé</span></div><div id="summary"><p class="muted">Complète le questionnaire puis clique sur « Calculer le bilan ».</p></div></div>
+<div class="card"><h2>Scénario d'évolution sans suivi chiropratique</h2><p class="sub">Projection illustrative des facteurs de contexte et de leur retentissement potentiel — pas une prédiction individuelle ni une estimation de risque médical.</p>
+<div class="grid">
+<div class="field"><label for="stress">Stress environnemental futur (hypothèse)</label><select id="stress" onchange="drawProjection()"><option value="0">Faible / mieux maîtrisé</option><option value="1" selected>Stable</option><option value="2">Élevé / prolongé</option></select></div>
+<div class="field"><label for="ageing">Horizon de vieillissement</label><select id="ageing" onchange="drawProjection()"><option value="1">5 ans</option><option value="2">10 ans</option><option value="3">15 ans</option><option value="4">20 ans</option></select></div>
+<div class="field"><label for="activityFactor">Activité physique envisagée</label><select id="activityFactor" onchange="drawProjection()"><option value="0">Faible / sédentarité</option><option value="1" selected>Modérée</option><option value="2">Régulière et adaptée</option></select></div>
+<div class="field"><label for="baseline">Charge ressentie actuelle (0–10)</label><input id="baseline" type="number" min="0" max="10" value="4" oninput="drawProjection()"></div>
+</div>
+<div class="chart-wrap"><canvas id="projection" width="900" height="300" role="img" aria-label="Courbe illustrative de charge ressentie potentielle"></canvas></div>
+<p class="muted" id="projectionText">Le scénario sera calculé à partir des hypothèses choisies.</p>
+<div class="notice">La courbe ne signifie pas que l'absence de chiropratique entraîne une dégradation. Elle illustre seulement comment une charge ressentie pourrait évoluer selon des hypothèses de stress, d'activité et de vieillissement, avec une grande variabilité individuelle. Aucun bénéfice préventif ou causal des soins chiropratiques n'est supposé. À 5, 10, 15 et 20 ans, les incertitudes deviennent particulièrement importantes.</div>
+</div>
+<div class="card"><h2>Risques potentiels et retentissement à explorer</h2><p class="sub">Pistes de discussion individualisées, à confirmer avec l'histoire du patient, l'examen et les facteurs de protection.</p><div class="risk-list" id="risks"><div class="risk">Complète le bilan pour faire apparaître des pistes d'entretien.</div></div></div>
+</section>
+<section id="suivi" class="panel">
+<div class="card"><h2>Suivi dans le temps</h2><p class="sub">Enregistre les résultats successifs dans la session actuelle pour visualiser les changements entre bilans. Les données disparaissent à la fermeture ou au rechargement de la page.</p>
+<div class="actions"><button class="btn" onclick="saveSession()">Ajouter ce bilan à l'historique</button><button class="btn secondary" onclick="window.print()">Imprimer / PDF</button><button class="btn ghost" onclick="clearHistory()">Effacer l'historique de cette session</button></div>
+<div class="chart-wrap"><canvas id="historyChart" width="900" height="300" role="img" aria-label="Évolution des scores au fil des bilans"></canvas></div><div id="historyList"><p class="muted">Aucun bilan enregistré dans cette session.</p></div>
+</div>
+<div class="card"><h3>Repères de suivi trimestriel</h3><p class="muted">Comparer les mêmes dimensions, dans des conditions similaires, en notant les événements de vie, changements d'activité, sommeil, stress et éventuels soins concomitants. Une variation de score n'établit pas à elle seule la cause du changement.</p></div>
+</section>
+<div class="footer">Prototype clinique à valider · Pas un outil de diagnostic · Aucune donnée patient n'est conservée</div>
+</main>
 <script>
-/* -------------------------------------------------------
-   QUESTIONS PAR CATÉGORIES
--------------------------------------------------------- */
-const categories = {
-    "Mental 🧠": [
-        "Difficulté à se concentrer",
-        "Pensées envahissantes",
-        "Baisse de motivation",
-        "Sensation d’être débordé"
-    ],
-    "Système Nerveux ⚡": [
-        "Sursauts faciles",
-        "Peur d’être seul",
-        "Difficulté à se sentir en sécurité",
-        "Hypervigilance",
-        "Sensations d’être sur les nerfs"
-    ],
-    "Digestif 🍃": [
-        "Ballonnements",
-        "Digestion lente",
-        "Inconfort après les repas",
-        "Difficulté à digérer le gras"
-    ],
-    "Hormonal 🌸": [
-        "Sautes d’humeur",
-        "Règles douloureuses",
-        "Acné cyclique",
-        "Sensibilité importante avant règles"
-    ],
-    "Sommeil 😴": [
-        "Réveils nocturnes",
-        "Cauchemars",
-        "Sommeil agité"
-    ],
-    "Émotionnel 💗": [
-        "Coups de blues",
-        "Stress régulier",
-        "Irritabilité"
-    ],
-    "Physique 💪": [
-        "Maux de tête",
-        "Vertiges",
-        "Tachycardie",
-        "Fatigue au réveil",
-        "Envies de sucre"
-    ]
-};
-
-/* -------------------------------------------------------
-   GÉNÉRATION AUTOMATIQUE DU QUESTIONNAIRE
--------------------------------------------------------- */
-const form = document.getElementById("formulaire");
-
-Object.entries(categories).forEach(([cat, questions], catIndex) => {
-    let html = `<div class="card"><div class="category-title">${cat}</div>`;
-
-    questions.forEach((q, i) => {
-        html += `
-        <div class="question">
-            ${q}
-            <div class="responses">
-                <input type="radio" id="${catIndex}_${i}_0" name="${catIndex}_${i}" value="0">
-                <label for="${catIndex}_${i}_0">Rare / jamais</label>
-
-                <input type="radio" id="${catIndex}_${i}_1" name="${catIndex}_${i}" value="1">
-                <label for="${catIndex}_${i}_1">1–3 fois / mois</label>
-
-                <input type="radio" id="${catIndex}_${i}_2" name="${catIndex}_${i}" value="2">
-                <label for="${catIndex}_${i}_2">1+ fois / semaine</label>
-            </div>
-        </div>`;
-    });
-
-    html += `</div>`;
-    form.innerHTML += html;
-});
-
-/* -------------------------------------------------------
-   NOUVELLE ANALYSE CLINIQUE
--------------------------------------------------------- */
-function calculateResults() {
-    const prenom = document.getElementById("prenom").value.trim();
-    const nom = document.getElementById("nom").value.trim();
-
-    const results = document.getElementById("results");
-    results.innerHTML = `<h2>Résultats pour ${prenom} ${nom}</h2>`;
-
-    let categoryIndex = 0;
-
-    Object.entries(categories).forEach(([cat, questions]) => {
-        let moderate = 0;
-        let frequent = 0;
-
-        questions.forEach((q, i) => {
-            const selected = document.querySelector(`input[name="${categoryIndex}_${i}"]:checked`);
-            if (!selected) return;
-
-            const val = Number(selected.value);
-            if (val === 1) moderate++;
-            if (val === 2) frequent++;
-        });
-
-        let color = "green";
-        let label = "Bon équilibre";
-
-        const modRate = moderate / questions.length;
-        const freqRate = frequent / questions.length;
-
-        if (frequent >= 2 || freqRate >= 0.20 || modRate >= 0.30) {
-            color = "red";
-            label = "En surcharge – nécessite de l'attention";
-        } else if (frequent >= 1 || modRate >= 0.20) {
-            color = "orange";
-            label = "Tension modérée";
-        }
-
-        results.innerHTML += `
-            <div class="scoreBox ${color}">
-                ${cat} : ${label}<br>
-                <small>${moderate} symptômes mensuels – ${frequent} hebdomadaires</small>
-            </div>
-        `;
-
-        categoryIndex++;
-    });
-}
+const groups=[
+{title:"🧠 Mental & concentration",items:["Difficulté à maintenir mon attention ou à me concentrer","Sensation d'être mentalement débordé"]},
+{title:"⚡ Stress & régulation ressentie",items:["Difficulté à retrouver le calme après une contrariété","Sensation d'être souvent en état d'alerte ou sur le qui-vive"]},
+{title:"🌙 Sommeil & récupération",items:["Sommeil non réparateur ou réveils nocturnes","Fatigue qui gêne mes activités dans la journée"]},
+{title:"💗 Humeur & émotions",items:["Stress ou inquiétude qui prend beaucoup de place","Irritabilité, baisse de moral ou difficulté à profiter des activités"]},
+{title:"💪 Douleur & fonction physique",items:["Douleur ou inconfort corporel gênant mes activités","Limitation dans les gestes, déplacements ou activités habituelles"]},
+{title:"🍃 Vie quotidienne & digestion",items:["Inconfort digestif gênant mon quotidien","Difficulté à maintenir mes activités sociales, professionnelles ou personnelles"]}
+];
+const qRoot=document.getElementById('questions');
+groups.forEach((g,gi)=>{const block=document.createElement('div');block.innerHTML='<div class="section-title"><span>'+g.title.split(' ')[0]+'</span><h3>'+g.title.substring(g.title.indexOf(' ')+1)+'</h3></div>';g.items.forEach((q,qi)=>{const idx=gi*2+qi;const d=document.createElement('div');d.className='question';d.innerHTML='<p>'+(idx+1)+'. '+q+'</p><div class="choices">'+['Jamais','Rarement','Parfois','Souvent','Très souvent'].map((v,n)=>'<label class="choice"><input type="radio" name="q'+idx+'" value="'+(n*2.5)+'"><span>'+v+'</span></label>').join('')+'</div>';block.appendChild(d)});qRoot.appendChild(block)});
+document.querySelectorAll('#questions input').forEach(x=>x.addEventListener('change',updateProgress));
+document.getElementById('date').value=new Date().toISOString().slice(0,10);
+let currentScores=null;let history=[];
+function go(id){document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('active',t.dataset.tab===id));document.querySelectorAll('.panel').forEach(p=>p.classList.toggle('active',p.id===id));if(id==='suivi')drawHistory();if(id==='analyse')drawProjection();window.scrollTo({top:0,behavior:'smooth'})}
+document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click',()=>go(t.dataset.tab)));
+function updateProgress(){const n=document.querySelectorAll('#questions input:checked').length;document.getElementById('completion').textContent=n+' / 12 réponses';document.getElementById('progressbar').style.width=(n/12*100)+'%'}
+function scoreNow(){const vals=[];for(let i=0;i<12;i++){const el=document.querySelector('input[name="q'+i+'"]:checked');if(!el){alert('Merci de répondre aux 12 questions pour obtenir une synthèse complète.');return}vals.push(Number(el.value))}currentScores=groups.map((g,i)=>({name:g.title.replace(/^\S+\s/,''),score:(vals[i*2]+vals[i*2+1])/2}));renderSummary();go('analyse')}
+function renderSummary(){if(!currentScores)return;document.getElementById('scoreDate').textContent=document.getElementById('date').value||'Date non renseignée';const avg=currentScores.reduce((s,x)=>s+x.score,0)/currentScores.length;document.getElementById('summary').innerHTML='<div class="metric-grid"><div class="metric"><strong>'+avg.toFixed(1)+'/10</strong><small>Charge ressentie moyenne*</small></div><div class="metric"><strong>'+currentScores.filter(x=>x.score>=5).length+'/6</strong><small>Dimensions à approfondir*</small></div><div class="metric"><strong>'+document.getElementById('age').value+'</strong><small>Âge déclaré (ans)</small></div></div>'+currentScores.map(x=>'<div style="margin:15px 0"><div style="display:flex;justify-content:space-between;gap:8px"><b>'+x.name+'</b><b>'+x.score.toFixed(1)+'/10</b></div><div class="bar"><i style="width:'+x.score*10+'%"></i></div></div>').join('')+'<p class="muted">*Scores descriptifs calculés à partir des réponses de ce questionnaire prototype, non validés. Ils ne constituent ni diagnostic ni mesure objective du système nerveux.</p>';renderRisks(avg)}
+function renderRisks(avg){const act=Number(document.getElementById('activity').value);const risks=[];const add=(a,b)=>risks.push('<div class="risk"><b>'+a+'</b><span class="muted">'+b+'</span></div>');if(currentScores[2].score>=5)add('Récupération / sommeil','Explorer le retentissement sur l’énergie, l’attention, l’humeur et la récupération.');if(currentScores[4].score>=5)add('Douleur / fonction','Préciser les activités limitées, la durée, les facteurs aggravants et les signes nécessitant un avis médical.');if(currentScores[1].score>=5||currentScores[3].score>=5)add('Stress / vécu émotionnel','Explorer les sources de stress, les ressources, le sentiment de sécurité et l’impact sur la vie quotidienne.');if(currentScores[0].score>=5)add('Concentration / charge mentale','Explorer l’impact sur le travail, les études, les tâches domestiques et les interactions.');if(currentScores[5].score>=5)add('Vie quotidienne / digestion','Préciser fréquence, contexte, alimentation, gêne sociale et évolution des symptômes.');if(act===0)add('Activité physique','Évaluer les obstacles au mouvement et discuter d’une reprise progressive, adaptée et sécuritaire.');if(!risks.length)add('Prévention et facteurs protecteurs','Faire le point sur les habitudes, les objectifs du patient et les facteurs qui soutiennent son bien-être.');document.getElementById('risks').innerHTML=risks.join('')}
+function previewPhoto(e,id){const f=e.target.files&&e.target.files[0];if(!f)return;if(!f.type.startsWith('image/'))return alert('Choisis un fichier image.');const img=document.getElementById(id);if(img.dataset.url)URL.revokeObjectURL(img.dataset.url);const url=URL.createObjectURL(f);img.src=url;img.dataset.url=url;img.classList.remove('hidden')}
+function drawProjection(){const c=document.getElementById('projection');if(!c)return;const ctx=c.getContext('2d'),w=c.width,h=c.height;ctx.clearRect(0,0,w,h);const stress=Number(document.getElementById('stress').value),age=Number(document.getElementById('ageing').value),act=Number(document.getElementById('activityFactor').value),base=Math.max(0,Math.min(10,Number(document.getElementById('baseline').value)||0));const years=[0,5,10,15,20].filter((y,i)=>i===0||y<=age*5);const points=years.map(y=>Math.min(10,Math.max(0,base+y*(.025+stress*.035-act*.018))));ctx.strokeStyle='#e8ece7';ctx.lineWidth=1;for(let i=0;i<=10;i+=2){const y=h-35-i*(h-65)/10;ctx.beginPath();ctx.moveTo(55,y);ctx.lineTo(w-20,y);ctx.stroke();ctx.fillStyle='#718079';ctx.font='15px sans-serif';ctx.fillText(i,25,y+5)}ctx.strokeStyle='#5f8274';ctx.lineWidth=4;ctx.beginPath();points.forEach((v,i)=>{const x=55+i*(w-95)/Math.max(1,points.length-1),y=h-35-v*(h-65)/10;if(i===0)ctx.moveTo(x,y);else ctx.lineTo(x,y)});ctx.stroke();points.forEach((v,i)=>{const x=55+i*(w-95)/Math.max(1,points.length-1),y=h-35-v*(h-65)/10;ctx.fillStyle='#5f8274';ctx.beginPath();ctx.arc(x,y,6,0,Math.PI*2);ctx.fill();ctx.fillStyle='#53645c';ctx.font='15px sans-serif';ctx.fillText(years[i]+' ans',x-18,h-8)});document.getElementById('projectionText').textContent='Scénario illustratif sans suivi chiropratique : niveau hypothétique de charge ressentie de '+base+'/10 aujourd’hui à '+points[points.length-1].toFixed(1)+'/10 à '+years[years.length-1]+' ans, selon les paramètres choisis. Ce calcul pédagogique n’est pas issu d’une cohorte clinique ni d’un modèle prédictif validé.'}
+function saveSession(){if(!currentScores){alert('Calcule d’abord le bilan.');return}history.push({date:document.getElementById('date').value||'Date non renseignée',name:(document.getElementById('first').value+' '+document.getElementById('last').value).trim(),scores:currentScores.map(x=>x.score),avg:currentScores.reduce((s,x)=>s+x.score,0)/6});drawHistory();go('suivi')}
+function drawHistory(){const c=document.getElementById('historyChart');if(!c)return;const ctx=c.getContext('2d'),w=c.width,h=c.height;ctx.clearRect(0,0,w,h);ctx.strokeStyle='#e8ece7';for(let i=0;i<=10;i+=2){const y=h-35-i*(h-65)/10;ctx.beginPath();ctx.moveTo(55,y);ctx.lineTo(w-20,y);ctx.stroke();ctx.fillStyle='#718079';ctx.font='15px sans-serif';ctx.fillText(i,25,y+5)}if(history.length){ctx.strokeStyle='#5f8274';ctx.lineWidth=4;ctx.beginPath();history.forEach((p,i)=>{const x=55+i*(w-95)/Math.max(1,history.length-1),y=h-35-p.avg*(h-65)/10;if(i===0)ctx.moveTo(x,y);else ctx.lineTo(x,y)});ctx.stroke();history.forEach((p,i)=>{const x=55+i*(w-95)/Math.max(1,history.length-1),y=h-35-p.avg*(h-65)/10;ctx.fillStyle='#5f8274';ctx.beginPath();ctx.arc(x,y,6,0,Math.PI*2);ctx.fill();ctx.fillStyle='#53645c';ctx.font='13px sans-serif';ctx.fillText(p.date,x-25,h-8)})}else{ctx.fillStyle='#7a8780';ctx.font='18px sans-serif';ctx.fillText('Les bilans enregistrés apparaîtront ici.',65,150)}document.getElementById('historyList').innerHTML=history.length?history.map((p,i)=>'<div class="history-item"><div><b>'+p.date+'</b><div class="muted">'+(p.name||'Patient')+' · Charge moyenne '+p.avg.toFixed(1)+'/10</div></div><span class="tag">Bilan '+(i+1)+'</span></div>').join(''):'<p class="muted">Aucun bilan enregistré dans cette session.</p>'}
+function clearHistory(){if(confirm('Effacer les bilans de cette session ?')){history=[];drawHistory()}}
+drawProjection();drawHistory();
 </script>
-
-</body>
-</html>
+</body></html>
